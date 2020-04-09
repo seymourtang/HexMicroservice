@@ -3,6 +3,7 @@ package mongodb
 import (
 	"HexMicroservice/shortener"
 	"context"
+	"fmt"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -18,6 +19,7 @@ type mongoRepository struct {
 }
 
 func NewMongoRepository(mongoURL, mongoDB string, mongoTimeout int) (*mongoRepository, error) {
+	fmt.Println("Using MongoDB")
 	repo := &mongoRepository{
 		database: mongoDB,
 		timeout:  time.Duration(mongoTimeout) * time.Second,
