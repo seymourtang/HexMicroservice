@@ -19,7 +19,7 @@ type mongoRepository struct {
 }
 
 func NewMongoRepository(mongoURL, mongoDB string, mongoTimeout int) (*mongoRepository, error) {
-	fmt.Println("Using MongoDB")
+	fmt.Println("Using MongoDB...")
 	repo := &mongoRepository{
 		database: mongoDB,
 		timeout:  time.Duration(mongoTimeout) * time.Second,

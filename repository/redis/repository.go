@@ -13,7 +13,7 @@ type redisRepository struct {
 }
 
 func NewRedisRepository(redisURL string) (shortener.RedirectRepository, error) {
-	fmt.Println("Using Redis")
+	fmt.Println("Using Redis...")
 	repo := &redisRepository{}
 	client, err := newRedisClient(redisURL)
 	if err != nil {

@@ -3,6 +3,7 @@ package main
 import (
 	h "HexMicroservice/api"
 	mr "HexMicroservice/repository/mongodb"
+	my "HexMicroservice/repository/mysql"
 	rr "HexMicroservice/repository/redis"
 	"HexMicroservice/shortener"
 	"fmt"
@@ -19,6 +20,7 @@ import (
 const (
 	REDIS string = "redis"
 	MONGO string = "mongo"
+	MYSQL string = "mysql"
 )
 
 func httpPost() string {
@@ -43,6 +45,14 @@ func chooseRepo() shortener.RedirectRepository {
 		mongodb := os.Getenv("MONGO_DB")
 		mongoTimeout, _ := strconv.Atoi(os.Getenv("MONGO_TIMEOUT"))
 		repo, err := mr.NewMongoRepository(mongoURL, mongodb, mongoTimeout)
+		if err != nil {
+			log.Fatal(err)
+		}
+		return repo
+	case MYSQL:
+		mysqURL := os.Getenv("MYSQL_URL")
+		mysqlDBName := os.Getenv("MYSQL_DBNAME")
+		repo, err := my.NewMysqlRepository(mysqURL, mysqlDBName)
 		if err != nil {
 			log.Fatal(err)
 		}
